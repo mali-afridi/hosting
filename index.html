@@ -5,11 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sequential Image Fade Example</title>
   <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    .image-container {
+      display: flex;
+    }
     .fade-in {
       opacity: 0;
       transition: opacity 2s ease-in;
-      display: block;
-      margin: 10px auto;
+      margin: 0 10px;
+      max-width: 300px; /* Adjust based on your image size */
     }
     .fade-in.loaded {
       opacity: 1;
@@ -17,9 +28,11 @@
   </style>
 </head>
 <body>
-  <img src="af9.png" class="fade-in" id="image1" alt="Image 1">
-  <img src="aperio3.png" class="fade-in" id="image2" alt="Image 2">
-  <img src="35.jpg" class="fade-in" id="image3" alt="Image 3">
+  <div class="image-container">
+    <img src="af9.png" class="fade-in" id="image1" alt="Image 1">
+    <img src="aperio3.png" class="fade-in" id="image2" alt="Image 2">
+    <img src="35.jpg" class="fade-in" id="image3" alt="Image 3">
+  </div>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       function fadeInImage(img, callback) {
@@ -28,6 +41,7 @@
           // Call the callback function when the fade-in is complete
           setTimeout(callback, 2000); // 2000ms is the duration of the fade-in
         };
+        img.src = img.src; // Trigger image loading if already cached
       }
 
       var images = [
