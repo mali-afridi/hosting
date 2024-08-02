@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Fade Example</title>
+  <title>Sequential Image Fade Example</title>
   <style>
     .fade-in {
       opacity: 0;
       transition: opacity 2s ease-in;
+      display: block;
+      margin: 10px auto;
     }
     .fade-in.loaded {
       opacity: 1;
@@ -15,13 +17,36 @@
   </style>
 </head>
 <body>
-  <img src="af9.png" class="fade-in" alt="Your Image Description">
+  <img src="af9.png" class="fade-in" id="image1" alt="Image 1">
+  <img src="aperio3.png" class="fade-in" id="image2" alt="Image 2">
+  <img src="35.jpg" class="fade-in" id="image3" alt="Image 3">
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      var img = document.querySelector('.fade-in');
-      img.onload = function() {
-        img.classList.add('loaded');
-      };
+      function fadeInImage(img, callback) {
+        img.onload = function() {
+          img.classList.add('loaded');
+          // Call the callback function when the fade-in is complete
+          setTimeout(callback, 2000); // 2000ms is the duration of the fade-in
+        };
+      }
+
+      var images = [
+        document.getElementById('image1'),
+        document.getElementById('image2'),
+        document.getElementById('image3')
+      ];
+
+      // Function to start the fade-in sequence
+      function startFadeInSequence(index) {
+        if (index < images.length) {
+          fadeInImage(images[index], function() {
+            startFadeInSequence(index + 1); // Move to the next image
+          });
+        }
+      }
+
+      // Start the sequence with the first image
+      startFadeInSequence(0);
     });
   </script>
 </body>
