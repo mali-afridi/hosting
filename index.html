@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Fade Example</title>
+  <style>
+    .fade-in {
+      opacity: 0;
+      transition: opacity 2s ease-in;
+    }
+    .fade-in.loaded {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <img src="af9.png" class="fade-in" alt="Your Image Description">
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var img = document.querySelector('.fade-in');
+      img.onload = function() {
+        img.classList.add('loaded');
+      };
+    });
+  </script>
+</body>
+</html>
